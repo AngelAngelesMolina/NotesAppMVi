@@ -3,6 +3,8 @@ package com.jaamcoding.notesapptesting.core.di
 import android.app.Application
 import androidx.room.Room
 import com.jaamcoding.notesapptesting.core.data.local.NoteDb
+import com.jaamcoding.notesapptesting.core.data.repository.NoteRepositoryImpl
+import com.jaamcoding.notesapptesting.core.domain.repository.NoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,12 @@ object AppModule {
     @Singleton
     fun proviteNotesDb(application: Application): NoteDb {
         return Room.databaseBuilder(application, NoteDb::class.java, "note_db.db").build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNoteRepository(noteDb: NoteDb): NoteRepository {
+        return NoteRepositoryImpl(noteDb)
     }
 
 }
