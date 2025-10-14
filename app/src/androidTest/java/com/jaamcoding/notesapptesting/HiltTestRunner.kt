@@ -1,15 +1,20 @@
 package com.jaamcoding.notesapptesting
 
 import android.app.Activity
+import android.app.Application
+import android.content.Context
 import android.content.Intent
 import androidx.test.runner.AndroidJUnitRunner
 import dagger.hilt.android.testing.HiltTestApplication
 
 class HiltTestRunner : AndroidJUnitRunner() {
 
-    override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity? {
-        return super.newActivity(cl, HiltTestApplication::class.java.name, intent)
-
+    override fun newApplication(
+        cl: ClassLoader?,
+        className: String?,
+        context: Context?
+    ): Application? {
+        return super.newApplication(cl, HiltTestApplication::class.java.name, context)
     }
 
 }
