@@ -40,7 +40,10 @@ class NoteListViewModel @Inject constructor(
     }
 
     fun changeOrder() {
-
+        viewModelScope.launch {
+            _orderByTitleState.update { !it }
+            loadNotes()
+        }
     }
 
 
