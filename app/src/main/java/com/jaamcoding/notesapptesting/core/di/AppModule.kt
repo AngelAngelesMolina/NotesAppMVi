@@ -2,6 +2,7 @@ package com.jaamcoding.notesapptesting.core.di
 
 import android.app.Application
 import androidx.room.Room
+import com.jaamcoding.notesapptesting.add_note.domain.use_case.UpsertNote
 import com.jaamcoding.notesapptesting.core.data.local.NoteDb
 import com.jaamcoding.notesapptesting.core.data.repository.NoteRepositoryImpl
 import com.jaamcoding.notesapptesting.core.domain.repository.NoteRepository
@@ -40,6 +41,12 @@ object AppModule {
     @Singleton
     fun provideDeleteNoteUseCase(noteRepository: NoteRepository): DeleteNote {
         return DeleteNote(noteRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpsertNoteUseCase(noteRepository: NoteRepository) : UpsertNote{
+        return UpsertNote(noteRepository)
     }
 
 }
