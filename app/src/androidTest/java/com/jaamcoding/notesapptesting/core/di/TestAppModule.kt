@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.jaamcoding.notesapptesting.add_note.domain.use_case.UpsertNote
 import com.jaamcoding.notesapptesting.core.data.local.NoteDb
+import com.jaamcoding.notesapptesting.core.data.remote.api.ImagesApi
 import com.jaamcoding.notesapptesting.core.data.repository.FakeAndroidNoteRepository
 import com.jaamcoding.notesapptesting.core.domain.repository.NoteRepository
 import com.jaamcoding.notesapptesting.note_list.domain.use_case.DeleteNote
@@ -12,6 +13,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 
@@ -47,6 +50,16 @@ object TestAppModule {
     @Singleton
     fun provideUpsertNoteUseCase(noteRepository: NoteRepository) : UpsertNote{
         return UpsertNote(noteRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImagesApi(): ImagesApi {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(ImagesApi.BASE_URL)
+            .build().create(ImagesApi::class.java)
+
     }
 
 
