@@ -36,15 +36,15 @@ class AddNoteViewModel @Inject constructor(
 
 
             is AddNoteActions.PickImage -> {
-                TODO()
+//                TODO()
             }
 
             is AddNoteActions.UpdateSearchImageQuery -> {
-                TODO()
+//                TODO()
             }
 
             AddNoteActions.UpdateImagesDialogVisibility -> {
-                TODO()
+//                TODO()
             }
 
             AddNoteActions.SaveNote -> {
